@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d2414672337796e42a4fca511107df7f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wallPrefab: {fileID: 4647179939809517125, guid: 5491cd1918e3596448391d6e7fa6bd8f, type: 3}
+  - bumperPrefab: {instanceID: 0}
+  - obstaclePrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
