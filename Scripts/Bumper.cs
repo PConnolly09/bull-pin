@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -9,16 +10,23 @@ public class Bumper : MonoBehaviour
     public float flashDuration = 0.1f;
     public float scalePulse = 1.3f;
 
+
     public ParticleSystem hitEffect;
     public AudioClip bounceSound;
 
+    public static readonly List<Bumper> All = new();
+
     public BumperEffect currentEffect;
+    public float effectCost;
 
     private AudioSource audioSource;
     private SpriteRenderer sr;
     private Color originalColor;
     private Vector3 originalScale;
     private bool isFlashing;
+
+    private void OnEnable() => All.Add(this);
+    private void OnDisable() => All.Remove(this);
 
     void Awake()
     {
@@ -29,6 +37,7 @@ public class Bumper : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+        effectCost = currentEffect != null ? currentEffect.GetBumperCost() : 0f;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -58,6 +67,11 @@ public class Bumper : MonoBehaviour
         }
 
         StartCoroutine(BounceFlash());
+    }
+
+    public float GetCost()
+    {
+        return effectCost;
     }
 
     System.Collections.IEnumerator BounceFlash()
